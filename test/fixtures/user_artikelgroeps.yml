@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  artikelgroep_id: 1
+  auth_c: false
+  auth_r: false
+  auth_u: false
+  auth_d: false
+
+two:
+  user_id: 1
+  artikelgroep_id: 1
+  auth_c: false
+  auth_r: false
+  auth_u: false
+  auth_d: false

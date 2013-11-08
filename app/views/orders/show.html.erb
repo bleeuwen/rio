@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Userid:</strong>
+  <%= @order.usr_name %>
+</p>
+
+<p>
+  <strong>Ordernr:</strong>
+  <%= @order.ordernr %>
+</p>
+
+
+<p>
+  <strong>Opmerking:</strong>
+  <%= @order.opmerking %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<% if $rio_mode == 1 %>
+    <%= link_to 'Back', orders_user_path(current_user.id) %>
+<% else %>
+    <%= link_to 'Back', orders_path %>
+<% end %>

@@ -1,0 +1,35 @@
+<h1>Overzicht Artikelen</h1>
+
+<%= form_tag artikels_path, method: 'get' , class: "field" do %>
+    <p>
+     <%= text_field_tag :search,  params[:search], class: "artikels_search   size10" %>
+     <%= submit_tag "Zoeken", name: nil %>
+    </p>
+<% end %>
+<div class="artikel_1"></div>
+<table>
+  <thead>
+  <tr>
+    <th>Artikelnummer</th>
+    <th>Name</th>
+    <th>Prijs</th>
+    <th>Art groep</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @artikels.each do |artikel| %>
+      <tr>
+        <%= render :partial => "regel", :locals => {:artikel => artikel, :crud => crud_current_user(artikel.artikelgroep_id)} %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user_has_any_create_artikel %>
+    <%= link_to 'New Artikel', new_artikel_path %>
+<% end %>

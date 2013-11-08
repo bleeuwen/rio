@@ -1,0 +1,56 @@
+<%= form_for(@user_artikelgroep) do |f| %>
+    <% if @user_artikelgroep.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user_artikelgroep.errors.count, "error") %> prohibited this user_artikelgroep from being
+            saved:</h2>
+
+          <ul>
+            <% @user_artikelgroep.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :user_id %>
+      <br>
+      <% if !@user_artikelgroep.user_id.nil? %>
+          <%= @user_artikelgroep.usr_name %>
+      <% else %>
+          <%= f.text_field :user_id %>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.label :artikelgroep_id %>
+      <br>
+      <% if !@user_artikelgroep.artikelgroep_id.nil? %>
+          <%= @user_artikelgroep.ag_groepcode %>
+      <% else %>
+          <%= f.collection_select(:artikelgroep_id, Artikelgroep.all, :id, :omschrijving) %>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.label :auth_c, "Create" %>
+      <br>
+      <%= f.check_box :auth_c %>
+    </div>
+    <div class="field">
+      <%= f.label :auth_r, "Read" %>
+      <br>
+      <%= f.check_box :auth_r %>
+    </div>
+    <div class="field">
+      <%= f.label :auth_u, "Update" %>
+      <br>
+      <%= f.check_box :auth_u %>
+    </div>
+    <div class="field">
+      <%= f.label :auth_d, "Delete" %>
+      <br>
+      <%= f.check_box :auth_d %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

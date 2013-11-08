@@ -1,0 +1,21 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <%= link_to  artikelgroeps_user_path do %>
+        <strong>Artikelgroepen (<%= @user.user_artikelgroeps.count %>)</strong>
+    <% end %>  </br>
+    <%= link_to  orders_user_path do %>
+        <strong>Orders (<%= @user.orders.count %>)</strong>
+    <% end %>
+    </br></br>
+    <% if signed_in? %>
+    <%= user_is_admin? ? "Admin" : "geen admin" %>
+    <% end %>
+  </aside>
+</div>

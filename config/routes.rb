@@ -1,4 +1,34 @@
 Rio::Application.routes.draw do
+  resources :orders do
+    member do
+      get :order_regels
+      get :new_order_regel
+    end
+  end
+  resources :user_artikelgroeps
+  resources :artikelgroeps
+  resources :artikels
+  resources :users do
+    member do
+      get :artikelgroeps
+      get :new_artikelgroep
+      get :orders
+      get :new_order
+    end
+  end
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signup', to: 'users#new', via: 'get'
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/help', to: 'static_pages#help', via: 'get'
+  match '/about', to: 'static_pages#about', via: 'get'
+  match '/contact', to: 'static_pages#contact', via: 'get'
+#??  match '/userart', to: 'static_pages#userart', via: 'get'
+  #first the specific action in order-regels, then the generic
+  match '/order_regels/artikel_selectie', to: 'order_regels#artikel_selectie', via: 'get'
+
+  resources :order_regels
+  root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -39,7 +69,7 @@ Rio::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

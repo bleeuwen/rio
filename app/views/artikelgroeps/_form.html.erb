@@ -1,0 +1,29 @@
+<%= form_for(@artikelgroep) do |f| %>
+  <% if @artikelgroep.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@artikelgroep.errors.count, "error") %> prohibited this artikelgroep from being saved:</h2>
+
+      <ul>
+      <% @artikelgroep.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :groepcode %><br>
+    <%= f.text_field :groepcode %>
+  </div>
+  <div class="field">
+    <%= f.label :omschrijving %><br>
+    <%= f.text_field :omschrijving %>
+  </div>
+  <div class="field">
+    <%= f.label :opmerking %><br>
+    <%= f.text_field :opmerking %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

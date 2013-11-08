@@ -1,0 +1,30 @@
+<%= form_for(@artikel) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="field">
+      <%= f.label :artikelnummer %>
+      <%= f.text_field :artikelnummer, :class => "size10 " %>
+    </div>
+    <div id="artikel_error"></div>
+    <div class="field">
+      <%= f.label :prijs %>
+      <%= f.text_field :prijs, :class => "size10", :value => number_to_currency(f.object.prijs, :unit => '') %>
+    </div>
+    <div class="field">
+      <%= f.label :omschrijving %>
+      <%= f.text_field :omschrijving, :class => "size20" %>
+    </div>
+    <div class="field">
+      <%= f.label :opmerking %>
+      <%= f.text_field :opmerking %>
+    </div>
+    <div class="field">
+      <%= f.label :artikelgroep_id %>
+          <%= f.collection_select(:artikelgroep_id, Artikelgroep.where("ID in (?)",ag_ids), :id, :omschrijving) %>
+    </div>
+    <div class="actions">
+      <%= f.submit yield(:rio_action) %>
+    </div>
+<% end %>
+
+

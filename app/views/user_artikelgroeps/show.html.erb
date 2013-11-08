@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_artikelgroep.usr_name %>
+</p>
+
+<p>
+  <strong>Artikelgroep:</strong>
+  <%= @user_artikelgroep.ag_groepcode %>
+</p>
+
+<p>
+  <strong>Auth c:</strong>
+  <%= @user_artikelgroep.auth_c %>
+</p>
+
+<p>
+  <strong>Auth r:</strong>
+  <%= @user_artikelgroep.auth_r %>
+</p>
+
+<p>
+  <strong>Auth u:</strong>
+  <%= @user_artikelgroep.auth_u %>
+</p>
+
+<p>
+  <strong>Auth d:</strong>
+  <%= @user_artikelgroep.auth_d %>
+</p>
+
+<%= link_to 'Edit', edit_user_artikelgroep_path(@user_artikelgroep) %> |
+<% if $rio_mode == 1 %>
+    <%= link_to 'Back',artikelgroeps_user_path(current_user.id) %>
+<% else %>
+    <%= link_to 'Back', user_artikelgroeps_path %>
+<% end %>

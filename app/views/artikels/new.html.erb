@@ -1,0 +1,7 @@
+<% provide(:title, "Nieuw artikel") %>
+<% provide(:rio_action, "Voeg artikel toe") %>
+<h1>New artikel</h1>
+
+<%= render :partial =>'form' , :locals => { :ag_ids=>Artikelgroep.user_may_create(current_user.id)}  %>
+
+<%= link_to 'Back', artikels_path %>

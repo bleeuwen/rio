@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Groepcode:</strong>
+  <%= @artikelgroep.groepcode %>
+</p>
+
+<p>
+  <strong>Omschrijving:</strong>
+  <%= @artikelgroep.omschrijving %>
+</p>
+
+<p>
+  <strong>Opmerking:</strong>
+  <%= @artikelgroep.opmerking %>
+</p>
+
+<%= link_to 'Edit', edit_artikelgroep_path(@artikelgroep) %> |
+<%= link_to 'Back', artikelgroeps_path %>

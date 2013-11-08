@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  groepcode: MyString
+  omschrijving: MyString
+  opmerking: MyString
+
+two:
+  groepcode: MyString
+  omschrijving: MyString
+  opmerking: MyString

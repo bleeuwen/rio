@@ -1,0 +1,22 @@
+
+Algemeen principe: Acties alleen op t estarten via de links en extra controles in de Models en controllers
+
+Application_controller bevat geen controle op sig_in omdat de statische pagina's oor iedereen zichtbaar zijn
+
+Artikelen zijn alleen maar zichtbaar als user C,R,U of D rechten heeft (user_artikelgroep)
+
+
+raadplegen artikelen (artikel_index)
+- helper artikels_users_selection selecteert de artikel_ids
+- actie index selecteert alleen bovengevonden id's
+
+Logging, roi_logger.rb (bevat ook docomentatie)
+
+
+User_artikelgroepen
+Het is mogelijk user_artikelgroepen als tabel zelf te behandelen, en als onderdeel bij een user.
+Dit biedt de mogelijkheid om massaal te updaten (en dus niet per user)
+Sturing vinddt plaats via globale variabele $rio_mode (misschien niet zo netjes of optimaal, maar werkt wel)
+
+
+

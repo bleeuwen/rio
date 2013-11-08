@@ -1,0 +1,29 @@
+<% provide(:title, @title) %>
+<h2>Orders van <%= @user.name %> </h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Ordernr</th>
+    <th>Opmerking</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.ordernr %></td>
+        <td><%= order.opmerking%></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Orderregels', order_regels_order_path(order) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= link_to 'Nieuwe order', new_order_user_path %>

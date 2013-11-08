@@ -1,0 +1,51 @@
+<% provide(:title, @title) %>
+<h2>Nieuwe artikelgroep voor <%= @user.name %> </h2>
+
+<%= form_for(@user_artikelgroep) do |f| %>
+    <% if @user_artikelgroep.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user_artikelgroep.errors.count, "error") %> prohibited this user_artikelgroep from being
+            saved:</h2>
+
+          <ul>
+            <% @user_artikelgroep.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :user_id %>
+      <br>
+      <%= @user_artikelgroep.usr_name %>
+    </div>
+    <div class="field">
+      <%= f.label :artikelgroep_id %>
+      <br>
+      <%= f.collection_select(:artikelgroep_id, Artikelgroep.not_yet_assigned_to(@user.id), :id, :omschrijving) %> </br>
+    </div>
+    <div class="field">
+      <%= f.label :auth_c, "Create" %>
+      <br>
+      <%= f.check_box :auth_c %>
+    </div>
+    <div class="field">
+      <%= f.label :auth_r, "Read" %>
+      <br>
+      <%= f.check_box :auth_r %>
+    </div>
+    <div class="field">
+      <%= f.label :auth_u, "Update" %>
+      <br>
+      <%= f.check_box :auth_u %>
+    </div>
+    <div class="field">
+      <%= f.label :auth_d, "Delete" %>
+      <br>
+      <%= f.check_box :auth_d %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

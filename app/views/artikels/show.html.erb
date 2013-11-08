@@ -1,0 +1,25 @@
+<% provide(:title, "Toon artikel") %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  Test <%= @artikel.omschrijving %>
+
+  <strong>Omschrijving:</strong>
+  <%= @artikel.omschrijving %>
+</p>
+
+<p>
+  <strong>Prijs:</strong>
+  <%= toon_prijs(@artikel.prijs) %>
+</p>
+
+<p>
+  <strong>Artikelgroep:</strong>
+  <%= @artikel.ag_omschrijving %>
+</p>
+
+<% if user_may_update_artikel(@artikel.artikelgroep_id) %>
+    <%= link_to 'Edit', edit_artikel_path(@artikel) %> |
+<% end %>
+<%= link_to 'Back', artikels_path %>

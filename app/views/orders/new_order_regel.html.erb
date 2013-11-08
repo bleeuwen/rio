@@ -1,0 +1,51 @@
+<% provide(:title, @title) %>
+<h2>Nieuwe orderregel voor <%= @order.usr_name %> ordernummer <%= @order.ordernr %></h2>
+
+<%= form_for(@order_regel, remote: true) do |f| %>
+    <% if @order_regel.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@order_regel.errors.count, "error") %> prohibited this order from being
+            saved:</h2>
+
+          <ul>
+            <% @order_regel.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="orderentry">
+      <div class="order_artikel">
+          <div id= "artikel_selected" ></div>
+          <%= f.hidden_field :artikel_id, :id => "order_artikel_id", :name => "artikel_id" %>
+
+        <div id="artikel_error"></div>
+        <div class="field">
+          <%= f.label :opmerking %>
+          <%= f.text_field :opmerking, class: "size20" %>
+        </div>
+      </div>
+      <div class="artikelselector">
+        Artikelselectie
+        <%= collection_select(nil, :id, Artikelgroep.where("ID in (?)", Artikelgroep.user_may_create(current_user.id)), :id, :omschrijving, {:prompt => "Selecteer artikelgroep"}, {:id => 'artikelgroeps_select'}) %>
+
+        <br><br>
+        <%= text_field_tag "artikel_zoekphrase" %>
+        <br>
+        <%= collection_select(nil, :id, Artikel.all, :id, :omschrijving, {:prompt => "Selecteer artikel"}, {:id => 'artikels_select'}) %>
+
+      </div>
+    </div>
+    <div class="orderactions">
+      <%= f.submit %>
+    </div>
+<% end %>
+
+<script>
+    $("#artikelselector" ).load(function(data){
+        alert("hallo")
+    });
+</script>
+
+

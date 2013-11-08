@@ -1,0 +1,6 @@
+<% provide(:title, "Edit artikel") %>
+<% provide(:rio_action, "Edit artikel") %>
+<h1>Edit artikel</h1>
+<%= render :partial =>'form' , :locals => { :ag_ids=>Artikelgroep.user_may_update(current_user.id)}  %>
+<%= link_to 'Show', @artikel %> |
+<%= link_to 'Back', artikels_path %>

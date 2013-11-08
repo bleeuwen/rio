@@ -1,0 +1,10 @@
+<h1>Editing order</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @order %> |
+<% if $rio_mode == 1 %>
+    <%= link_to 'Back', orders_user_path(current_user.id) %>
+<% else %>
+    <%= link_to 'Back', orders_path %>
+<% end %>

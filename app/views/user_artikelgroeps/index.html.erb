@@ -1,0 +1,38 @@
+<h1>User artikelgroepen</h1>
+<% $rio_mode = 0 %>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Artikelgroep</th>
+      <th>Auth c</th>
+      <th>Auth r</th>
+      <th>Auth u</th>
+      <th>Auth d</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_artikelgroeps.each do |user_artikelgroep| %>
+      <tr>
+        <td><%= user_artikelgroep.usr_name %></td>
+        <td><%= user_artikelgroep.ag_groepcode %></td>
+        <td><%= user_artikelgroep.auth_c %></td>
+        <td><%= user_artikelgroep.auth_r %></td>
+        <td><%= user_artikelgroep.auth_u %></td>
+        <td><%= user_artikelgroep.auth_d %></td>
+        <td><%= link_to 'Show', user_artikelgroep %></td>
+        <td><%= link_to 'Edit', edit_user_artikelgroep_path(user_artikelgroep) %></td>
+        <td><%= link_to 'Destroy', user_artikelgroep, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User artikelgroep', new_user_artikelgroep_path %>

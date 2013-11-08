@@ -1,0 +1,20 @@
+<td><%= artikel.artikelnummer %></td>
+<td><%= artikel.omschrijving %></td>
+<td><%= toon_prijs(artikel.prijs) %></td>
+<td><%= artikel.ag_omschrijving %></td>
+<% if crud.include? 'R'  %>
+    <td><%= link_to 'Show', artikel %></td>
+<% else %>
+    <td></td>
+<% end %>
+<% if crud.include? 'U' %>
+    <td><%= link_to 'Edit', edit_artikel_path(artikel) %></td>
+<% else %>
+    <td></td>
+<% end %>
+<% if crud.include? 'D' %>
+    <td><%= link_to 'Destroy', artikel, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+<% else %>
+    <td></td>
+<% end %>
+

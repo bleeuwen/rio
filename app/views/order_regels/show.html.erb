@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @order_regel.order_id %>
+</p>
+
+<p>
+  <strong>Artikel:</strong>
+  <%= @order_regel.artikel_id %>
+</p>
+
+<p>
+  <strong>Aantal:</strong>
+  <%= @order_regel.aantal %>
+</p>
+
+<p>
+  <strong>Opmerking:</strong>
+  <%= @order_regel.opmerking %>
+</p>
+
+<%= link_to 'Edit', edit_order_regel_path(@order_regel) %> |
+<%= link_to 'Back', order_regels_path %>

@@ -1,0 +1,33 @@
+<% provide(:title, @title) %>
+<h2>Artikelgroepen van <%= @user.name %> </h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Artikelgroep</th>
+    <th>Create</th>
+    <th>Read</th>
+    <th>Update</th>
+    <th>Delete</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @user_ags.each do |uag| %>
+      <tr>
+        <td><%= uag.ag_groepcode %></td>
+        <td><%= uag.auth_c %></td>
+        <td><%= uag.auth_r %></td>
+        <td><%= uag.auth_u %></td>
+        <td><%= uag.auth_d %></td>
+        <td><%= link_to 'Show', uag %></td>
+        <td><%= link_to 'Edit', edit_user_artikelgroep_path(uag) %></td>
+        <td><%= link_to 'Destroy', uag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= link_to 'New User artikelgroep', new_artikelgroep_user_path %>

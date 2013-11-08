@@ -1,0 +1,38 @@
+// Place all the styles related to the OrderRegels controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.orderentry{
+  -moz-box-sizing: border-box;
+  clear: both;
+  float: left;
+  width: 100%;
+  background-color: #EEEEEE;
+  font-size: 11px;
+  padding: 10px;
+  margin-bottom: 20px;
+
+
+}
+
+.order_artikel {
+  float: left;
+  width: 50%;
+  .field .size20 {
+    width: 50%;
+  }
+  .field .size10 {
+    width: 25%;
+  }
+  .field label {
+    width: 35%;
+  }
+}
+.artikelselector {
+  float: left;
+  width: 50%;
+}
+
+.orderactions {
+clear: both;
+}

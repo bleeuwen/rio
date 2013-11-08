@@ -1,0 +1,31 @@
+<h1>Listing artikelgroeps</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Groepcode</th>
+    <th>Omschrijving</th>
+    <th>Opmerking</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @artikelgroeps.each do |artikelgroep| %>
+      <tr>
+        <td><%= artikelgroep.groepcode %></td>
+        <td><%= artikelgroep.omschrijving %></td>
+        <td><%= artikelgroep.opmerking %></td>
+        <td><%= link_to 'Show', artikelgroep %></td>
+        <td><%= link_to 'Edit', edit_artikelgroep_path(artikelgroep) %></td>
+        <td><%= link_to 'Destroy', artikelgroep, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Artikelgroep', new_artikelgroep_path %>
