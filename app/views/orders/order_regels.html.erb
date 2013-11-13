@@ -6,7 +6,9 @@
 <table>
   <thead>
   <tr>
-    <th>Artikelnummer</th>
+    <th>Artnrr</th>
+    <th></th>
+    <th>Aantal</th>
     <th>Opmerking</th>
     <th></th>
     <th></th>
@@ -19,6 +21,8 @@
   <% @order_regels.each do |orderr| %>
       <tr>
         <td><%= orderr.art_artikelnummer %></td>
+        <td><%= orderr.art_omschrijving %></td>
+        <td><%= orderr.aantal %></td>
         <td><%= orderr.opmerking%></td>
         <td><%= link_to 'Show', orderr %></td>
         <td><%= link_to 'Edit', edit_order_regel_path(orderr) %></td>

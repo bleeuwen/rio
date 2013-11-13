@@ -8,6 +8,10 @@ module OrderRegelsHelper
     "#{artikel_join} #{current_user.id} #{artikel_sel_groep} #{artikel_like} "
   end
 
+  def order_regels_artikel_init
+    art1= Artikel.joins(artikels_order_current_user_select(nil, nil))
+    art1.map { |a| [a.omschrijving, a.id, {'data-prijs' => a.prijs, 'data-omschrijving' => a.omschrijving}] }.insert(0, "Selecteer een artikel")
+  end
 
 
 end

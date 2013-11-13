@@ -1,10 +1,4 @@
 Rio::Application.routes.draw do
-  resources :orders do
-    member do
-      get :order_regels
-      get :new_order_regel
-    end
-  end
   resources :user_artikelgroeps
   resources :artikelgroeps
   resources :artikels
@@ -28,6 +22,12 @@ Rio::Application.routes.draw do
   match '/order_regels/artikel_selectie', to: 'order_regels#artikel_selectie', via: 'get'
 
   resources :order_regels
+  resources :orders do
+    member do
+      get :order_regels
+      get :new_order_regel
+    end
+  end
   root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

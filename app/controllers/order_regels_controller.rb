@@ -29,7 +29,6 @@ class OrderRegelsController < ApplicationController
     @order_regel = OrderRegel.new(order_regel_params)
     @order_regel.order_id ||= $rio_order_id #backup for order_id
 
-
     respond_to do |format|
       if @order_regel.save
         if mode1?($rio_mode2) ##started from a specific order
@@ -39,6 +38,7 @@ class OrderRegelsController < ApplicationController
         end
         format.json { render action: 'show', status: :created, location: @order_regel }
       else
+      #  format.html { redirect_to about_url}
         format.html { render action: 'new' }
         format.json { render json: @order_regel.errors, status: :unprocessable_entity }
       end
@@ -84,6 +84,7 @@ class OrderRegelsController < ApplicationController
  #   RIO_LOGGER.info("order_regels_controller") { "artikel_selectie" }
     art1= Artikel.joins(artikels_order_current_user_select(params[:artikelgroep_id], params[:zoekphrase]))
     @artikels=art1.map { |a| [a.omschrijving, a.id, {'data-prijs'=>a.prijs,'data-omschrijving'=>a.omschrijving}] }.insert(0, "Selecteer een artikel")
+    logger.info @artikels
   end
 
   private

@@ -4,7 +4,7 @@ class OrderRegel < ActiveRecord::Base
 
   validates_presence_of :order, message: " onbekend"
   validates_presence_of :artikel, message: " onbekend"
-  validates_uniqueness_of :artikel_id, :scope => :order_id, message: " al bij user aanwezig"
+  validates_uniqueness_of :artikel_id, :scope => :order_id, message: " al bij order aanwezig"
 
   delegate :usr_name, to: :order
   delegate :ordernr, to: :order, prefix: :ord

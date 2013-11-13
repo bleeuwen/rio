@@ -15,17 +15,19 @@ Change_artikels_sel = ->
     url: update_artikels_path
     data:
       artikelgroep_id: $('#artikelgroeps_select').val()
-      zoekphrase:  $('artikel_zoekphrase').val()
+      zoekphrase: $('#artikel_zoekphrase').val()
     dataType: "script"
 
 jQuery ->
   $('#artikelgroeps_select').change Change_artikels_sel
+  $('#artikel_zoekphrase').blur  Change_artikels_sel
 
  #http://stackoverflow.com/questions/15685740/rails-dynamically-display-data-based-on-collection-select
 #om de omschrjving op te halen uit een id!!!
 # goede oefening: http://jsfiddle.net/Tt3TS/
   $("#artikels_select").change ->
+#    alert("test")
     chosen = $(this).find(":selected")
     $("#artikel_selected").text(chosen.data("omschrijving"))
     $("#order_artikel_id").val(@value)
-    $("#artikel_error").text(chosen.data("prijs"))
+#    $("#artikel_error").text(chosen.data("prijs"))

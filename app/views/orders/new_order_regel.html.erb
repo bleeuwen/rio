@@ -1,7 +1,7 @@
 <% provide(:title, @title) %>
 <h2>Nieuwe orderregel voor <%= @order.usr_name %> ordernummer <%= @order.ordernr %></h2>
 
-<%= form_for(@order_regel, remote: true) do |f| %>
+<%= form_for(@order_regel) do |f| %>
     <% if @order_regel.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@order_regel.errors.count, "error") %> prohibited this order from being
@@ -17,13 +17,15 @@
 
     <div class="orderentry">
       <div class="order_artikel">
-          <div id= "artikel_selected" ></div>
-          <%= f.hidden_field :artikel_id, :id => "order_artikel_id", :name => "artikel_id" %>
-
-        <div id="artikel_error"></div>
+        <div id="artikel_selected"></div>
+        <%= f.hidden_field :artikel_id, :id => "order_artikel_id" %>
         <div class="field">
           <%= f.label :opmerking %>
           <%= f.text_field :opmerking, class: "size20" %>
+        </div>
+        <div class="field">
+          <%= f.label :aantal %>
+          <%= f.text_field :aantal, class: "size10" %>
         </div>
       </div>
       <div class="artikelselector">
@@ -33,7 +35,10 @@
         <br><br>
         <%= text_field_tag "artikel_zoekphrase" %>
         <br>
-        <%= collection_select(nil, :id, Artikel.all, :id, :omschrijving, {:prompt => "Selecteer artikel"}, {:id => 'artikels_select'}) %>
+        <%= select_tag "artikels_select",
+                       options_for_select(order_regels_artikel_init),
+                       id: "artikels_select"
+        %>
 
       </div>
     </div>
@@ -42,10 +47,5 @@
     </div>
 <% end %>
 
-<script>
-    $("#artikelselector" ).load(function(data){
-        alert("hallo")
-    });
-</script>
 
 
