@@ -1,33 +1,41 @@
-<%= form_for(@order) do |f| %>
-    <% if @order.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<%= form_for(@order, :html => {:class => "form form-horizontal"}) do |f| %>
+    <fieldset>
+      <legend><%= "#{ @order.ordernr } " unless @order.ordernr.nil? %>order Information</legend>
+      <%= render('shared/error_messages', :object => f.object) %>
 
-          <ul>
-            <% @order.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :UserId %>
-      <% if !@order.user_id.nil? %>
-          <%= @order.usr_name %>
-      <% else %>
-          <%= f.text_field :user_id %>
+      <% if @order.user_id.nil? %>
+          <div class="control-group">
+            <%= f.label(:user_id, :class => "control-label") %>
+            <div class="controls">
+              <%= f.text_field(:user_id, :class => "input-xlarge") %>
+            </div>
+          </div>
       <% end %>
-    </div>
-    <div class="field">
-      <%= f.label :Ordernr %>
-      <%= f.text_field :ordernr %>
-    </div>
-    <div class="field">
-      <%= f.label :Opmerking %>
-      <%= f.text_field :opmerking %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
+
+      <div class="control-group">
+        <%= f.label(:ordernr, :class => "control-label") %>
+        <div class="controls">
+          <%= f.text_field(:ordernr, :class => "input-xlarge") %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label(:opmerking, :class => "control-label") %>
+        <div class="controls">
+          <%= f.text_field(:opmerking, :class => "input-xlarge") %>
+        </div>
+      </div>
+
+    </fieldset>
+
+    <fieldset>
+      <legend>order_regels <%= "That Fly the  #{ @order.ordernr }" unless @order.ordernr.blank? %></legend>
+      <%= render('order_regels_table', :f => f) %>
+      <%= link_to_add_fields("Add a order_regel", f, :order_regels, :class => "btn btn-primary", :title => "Add a new order_regel to the list of order_regels that fly this order.") %>
+      <p></p>
+    </fieldset>
+
+    <div class="modal-footer">
+      <%= f.submit("Save", :class => "btn btn-primary", :title => "Save the changes to this order.") %>
+      <%= link_to("Cancel", orders_path, :confirm => "Are you sure you want to cancel?  Any changes will be lost.", :class => "btn btn-inverse", :title => "Cancel the changes and return to the Home page.") %>
     </div>
 <% end %>

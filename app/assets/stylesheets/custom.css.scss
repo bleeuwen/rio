@@ -261,6 +261,8 @@ aside {
     float: left;
     margin-left: 20px;
     min-height: 1px;
+    text-align: right;
+    margin-right: 20px;
   }
   .size10 {
     width: 10%;
@@ -278,6 +280,7 @@ aside {
       float: left;
       margin-left: 20px;
       min-height: 1px;
+      text-align: right;
     }
     .size10 {
       width: 10%;
@@ -290,4 +293,28 @@ aside {
       border: 2px solid #FF0000;
     }
   }
+}
+.form-horizontal .control-label {
+  float: left;
+  padding-top: 5px;
+  text-align: right;
+  width: 160px;
+}
+table{
+  width: 100%;
+   th {
+     text-align: left;
+
+   }
+}
+.table th, .table td {
+  padding: 1px;
+  text-align: left;
+}
+/*catchall for jquery errors */
+.jquery_form_error_message {
+  background-color: red;
+}
+.hide_artikel_id {
+  display: none;
 }

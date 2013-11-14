@@ -1,25 +1,30 @@
-<p id="notice"><%= notice %></p>
+<h1>Viewing <%= @order.ordernr %></h1>
+<div class="form-horizontal">
+  <fieldset>
+    <legend><%= @order.ordernr %> order Information</legend>
+    <div class="control-group">
+      <label class="control-label">Order:</label>
+      <div class="controls">
+        <label class="radio inline"><strong><%= @order.ordernr %></strong></label>
+      </div>
+    </div>
 
+    <div class="control-group">
+      <label class="control-label">Opmerking:</label>
+      <div class="controls">
+        <span class="radio inline"><strong><%= @order.opmerking%></strong></span>
+      </div>
+    </div>
 
-<p>
-  <strong>Userid:</strong>
-  <%= @order.usr_name %>
-</p>
+  </fieldset>
 
-<p>
-  <strong>Ordernr:</strong>
-  <%= @order.ordernr %>
-</p>
+  <fieldset>
+    <legend>Orderregels</legend>
+    <%= render('order_regels_display') %>
+  </fieldset>
 
-
-<p>
-  <strong>Opmerking:</strong>
-  <%= @order.opmerking %>
-</p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<% if $rio_mode == 1 %>
-    <%= link_to 'Back', orders_user_path(current_user.id) %>
-<% else %>
-    <%= link_to 'Back', orders_path %>
-<% end %>
+  <div class="modal-footer">
+    <%= link_to("Edit", edit_order_path(@order), :class => "btn btn-primary", :title => "Edit #{ @order.ordernr }.") %>
+    <%= link_to("Back to Home", orders_path, :class => "btn btn-inverse", :title => "Return to the Home page.") %>
+  </div>
+</div>

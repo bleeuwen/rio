@@ -18,16 +18,9 @@ Rio::Application.routes.draw do
   match '/about', to: 'static_pages#about', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
 #??  match '/userart', to: 'static_pages#userart', via: 'get'
-  #first the specific action in order-regels, then the generic
-  match '/order_regels/artikel_selectie', to: 'order_regels#artikel_selectie', via: 'get'
-
-  resources :order_regels
-  resources :orders do
-    member do
-      get :order_regels
-      get :new_order_regel
-    end
-  end
+  #first the specific action in orders, then the generic
+  match '/orders/artikel_selectie', to: 'orders#artikel_selectie', via: 'get'
+  resources :orders
   root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

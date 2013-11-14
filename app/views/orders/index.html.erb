@@ -1,6 +1,6 @@
-<h1>Listing orders</h1>
+<h1>Orders</h1>
 
-<table>
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th>Ordernr</th>
@@ -18,9 +18,10 @@
         <td><%= order.ordernr %></td>
         <td><%= order.user_id %></td>
         <td><%= order.opmerking %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to('<i class="icon-eye-open"/>'.html_safe, order, title: t("show_item", itemfield:"order" , itemvalue: order.ordernr))  %></td>
+        <td><%= link_to('<i class="icon-edit"/>'.html_safe, edit_order_path(order), title: t("edit_item", itemfield:"order" , itemvalue: order.ordernr)) %></td>
+        <td><%= link_to('<i class="icon-remove"/>'.html_safe, order, :method => :delete, :confirm => "Are you sure you want to permanently delete the #{ order.ordernr } and all its associated Pilots?", title: t("delete_item", itemfield:"order" , itemvalue: order.ordernr)) %></td>
+
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Order', new_order_path %>
+<%= link_to 'New Order', new_order_path, :class => "btn btn-primary"  %>

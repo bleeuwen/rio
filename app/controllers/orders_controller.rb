@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  include OrdersHelper
   before_action :signed_in_user
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
@@ -48,7 +49,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1.json
   def update
     respond_to do |format|
-      if @order.update(order_params)
+      if @order.update_attributes(order_params)
         if mode1?($rio_mode) ##started from a specific user
           format.html { redirect_to orders_user_path(@order.user_id), notice: 'User order was successfully updated.' }
         else
@@ -77,22 +78,30 @@ class OrdersController < ApplicationController
     end
   end
 
-  def order_regels
-    @order = Order.find(params[:id])
-    @title = "Orders van " + @order.usr_name
-    @order_regels = @order.order_regels
-    $rio_mode2 = 1
+  #def depric_order_regels
+  #  @order = Order.find(params[:id])
+  #  @title = "Orders van " + @order.usr_name
+  #  @order_regels = @order.order_regels
+  #  $rio_mode2 = 1
+  #end
+  #
+  #def depric_new_order_regel
+  #  @order = Order.find(params[:id])
+  #  @title = "Nieuwe orderregel voor " + @order.usr_name
+  #  @order_regel=@order.order_regels.build #create relation with user
+  #  $rio_mode2 = 1
+  #  $rio_order_id = @order.id
+  #end
+
+  #Artikel selectie
+  # map to name and id for use in our options_for_select
+  # NB: artikel_selectie.js.erb must be present under views/orders !!!!
+  def artikel_selectie
+    #   RIO_LOGGER.info("order_regels_controller") { "artikel_selectie" }
+    art1= Artikel.joins(artikels_order_current_user_select(params[:artikelgroep_id], params[:zoekphrase]))
+    @artikels=art1.map { |a| [a.omschrijving, a.id, {'data-artikelnummer'=>a.artikelnummer,'data-prijs'=>a.prijs,'data-omschrijving'=>a.omschrijving}] }.insert(0, "Selecteer een artikel")
+    #logger.info @artikels
   end
-
-  def new_order_regel
-    @order = Order.find(params[:id])
-    @title = "Nieuwe orderregel voor " + @order.usr_name
-    @order_regel=@order.order_regels.build #create relation with user
-    $rio_mode2 = 1
-    $rio_order_id = @order.id
-  end
-
-
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -101,8 +110,9 @@ class OrdersController < ApplicationController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
+  # include nested parameters of order_regels
   def order_params
-    params.require(:order).permit(:ordernr, :user_id, :opmerking)
+    params.require(:order).permit(:ordernr, :user_id, :opmerking, order_regels_attributes: [:id, :artikel_id,:aantal,:opmerking,:_destroy])
   end
 
   def mode1?(inpval)
