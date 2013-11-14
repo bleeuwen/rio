@@ -1,0 +1,21 @@
+<table id="order_regels-table" class="table table-hover table-striped">
+  <thead>
+  <th>Artikel_id</th>
+  <th>Aantal</th>
+  <th>Opmerking</th>
+
+  <th></th>
+  </thead>
+  <tbody>
+  <%= f.fields_for(:order_regels) do |order_regels_form| %>
+      <tr class="fields">
+        <td><%= order_regels_form.text_field(:artikel_id, class: "size10") %></td>
+        <td><%= order_regels_form.text_field(:aantal, class: "size20") %></td>
+        <td><%= order_regels_form.text_field(:opmerking, class: "size20") %></td>
+        <td>
+          <%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, order_regels_form, title: "Delete this line.") %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

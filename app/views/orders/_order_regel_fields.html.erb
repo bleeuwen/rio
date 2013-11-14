@@ -1,0 +1,97 @@
+<div id="new-order_regel-fields" class="modal fade" data-backdrop="static">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Add an order_regel</h3>
+  </div>
+  <div class="modal-body">
+    <fieldset>
+      <div id="order_artikel_nummer">order_artikelnummer</div>
+      <br>
+
+      <div id="order_artikel_omschrijving">artikel_selected</div>
+      <br>
+
+
+     <% # hidden field not possible because of population of the master screen %>
+      <div class="control-group hide_artikel_id">
+        <%= f.label(:artikel_id, :class => "control-label") %>
+        <div class="controls">
+          <%= f.text_field(:artikel_id, id:"order_artikel_id", class: "input-xlarge field", data: {"validation" => "required", "validation-error-msg" => "Artikelnummer selecteren"}) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label(:aantal, :class => "control-label") %>
+        <div class="controls">
+          <% #test numeriek werkt nog niet   %>
+          <%= f.text_field(:aantal,  value: "1", class: "input-xlarge field", data: {"validation" => "required, number", "validation-allowing" => "number", "validation-error-msg" => "Aantal is required and must be numeric."}) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label(:opmerking, :class => "control-label") %>
+        <div class="controls">
+          <%= f.text_field(:opmerking, :class => "input-xlarge field") %>
+        </div>
+      </div>
+      <% ## hidden field destroy is set when destroy icon is clicked   %>
+      <%= f.hidden_field(:_destroy, :class => "field") %>
+    </fieldset>
+
+
+    <div class="artikelselector">
+      Artikelselectie
+      <%= collection_select(nil, :id, Artikelgroep.where("ID in (?)", Artikelgroep.user_may_create(current_user.id)), :id, :omschrijving, {:prompt => "Selecteer artikelgroep"}, {:id => 'artikelgroeps_select'}) %>
+
+      <br><br>
+      <%= text_field_tag "artikel_zoekphrase" %>
+      <br> <br>
+      <%= select_tag "artikels_select",
+                     options_for_select(order_regels_artikel_init),
+                     id: "artikels_select"
+      %>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="addButton" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" title="Add this order_regel to the list of order_regels that are assigned to this Ship.">Add</button>
+    <button id="cancelButton" type="button" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true" title="Close this screen without adding the order_regel to the list.">Cancel</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+    order_regelFieldsUI.init();
+</script>
+        <% ## /todo bring this this to coffee %>
+<script type="text/javascript">
+    (function() {
+        var Change_artikels_sel;
+
+        Change_artikels_sel = function() {
+            var update_artikels_path;
+            update_artikels_path = "/orders/artikel_selectie";
+            return $.ajax({
+                url: update_artikels_path,
+                data: {
+                    artikelgroep_id: $('#artikelgroeps_select').val(),
+                    zoekphrase: $('#artikel_zoekphrase').val()
+                },
+                dataType: "script"
+            });
+        };
+
+        jQuery(function() {
+            $('#artikelgroeps_select').change(Change_artikels_sel);
+            $('#artikel_zoekphrase').blur(Change_artikels_sel);
+            return $("#artikels_select").change(function() {
+                var chosen;
+                chosen = $(this).find(":selected");
+                $("#order_artikel_nummer").text(chosen.data("artikelnummer"));
+                $("#order_artikel_omschrijving").text(chosen.data("omschrijving"));
+                return $("#order_artikel_id").val(this.value);
+            });
+        });
+
+    }).call(this);
+
+</script>

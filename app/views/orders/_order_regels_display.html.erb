@@ -1,0 +1,16 @@
+<table id="order_regels-display-table" class="table table-hover table-striped">
+  <thead>
+      <th>Artikelnummer</th>
+      <th>Aantal</th>
+      <th>Opmerking</th>
+  </thead>
+  <tbody>
+      <% @order.order_regels.each do |order_regel| %>
+          <tr class="fields">
+            <td><%= order_regel.art_artikelnummer %></td>
+            <td><%= order_regel.aantal %></td>
+            <td><%= order_regel.opmerking %></td>
+          </tr>
+      <% end %>
+  </tbody>
+</table>
